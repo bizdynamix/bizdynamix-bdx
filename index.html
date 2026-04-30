@@ -6,21 +6,32 @@
   <title>BizDynamix — Digital Growth Agency | Cape Town</title>
   <meta name="description" content="Cape Town's full-service digital agency. Web design, app development, AI systems, SEO, and more. 10+ years growing South African businesses online.">
   
-  <!-- Canonical URL for SEO -->
+  <!-- Canonical & Sitemap -->
   <link rel="canonical" href="https://bizdynamix.co.za/">
-  
-  <!-- Open Graph Tags for Social Media -->
-  <meta property="og:title" content="BizDynamix — Digital Growth Agency">
-  <meta property="og:description" content="Cape Town's full-service digital agency. Web design, e-commerce, mobile apps, and AI chatbots.">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <!-- Robots & Geo -->
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="ZA-WC">
+  <meta name="geo.placename" content="Cape Town, South Africa">
+  <meta name="theme-color" content="#00e5c8">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BizDynamix — Digital Growth Agency | Cape Town">
+  <meta property="og:description" content="Cape Town's full-service digital agency. Web design, e-commerce, mobile apps, and AI chatbots. Packages from R5,000.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bizdynamix.co.za/">
   <meta property="og:image" content="https://bizdynamix.co.za/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="BizDynamix">
-  
+  <meta property="og:locale" content="en_ZA">
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BizDynamix — Digital Growth Agency | Cape Town">
-  <meta name="twitter:description" content="Web design, app development, AI systems, and SEO in Cape Town.">
+  <meta name="twitter:description" content="Web design, app development, AI systems, and SEO in Cape Town. Packages from R5,000.">
+  <meta name="twitter:image" content="https://bizdynamix.co.za/og-image.jpg">
   
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -30,7 +41,7 @@
     "name": "BizDynamix",
     "description": "Cape Town's full-service digital agency specializing in web design, e-commerce, mobile app development, and AI systems.",
     "url": "https://bizdynamix.co.za/",
-    "telephone": "+27-21-XXXXXXX",
+    "email": "info@bizdynamix.co.za",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "ZA",
@@ -40,16 +51,25 @@
     "sameAs": [
       "https://www.facebook.com/bizdynamix",
       "https://www.instagram.com/bizdynamix",
-      "https://www.linkedin.com/company/bizdynamix",
-      "https://twitter.com/bizdynamix"
+      "https://www.linkedin.com/company/bizdynamix"
     ],
-    "priceRange": "$$",
+    "priceRange": "R5,000–R12,000",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Agency Services",
+      "itemListElement": [
+        { "@type": "Offer", "name": "Starter Website Package", "price": "5000", "priceCurrency": "ZAR" },
+        { "@type": "Offer", "name": "Business Package", "price": "9900", "priceCurrency": "ZAR" },
+        { "@type": "Offer", "name": "Premium AI Package", "price": "12000", "priceCurrency": "ZAR" }
+      ]
+    },
     "knowsAbout": [
       "Web Design",
       "E-commerce Development",
       "Mobile App Development",
       "AI Chatbots",
-      "SEO"
+      "SEO",
+      "Business Automation"
     ]
   }
   </script>
@@ -651,15 +671,17 @@
     }
     .about-float {
       position:absolute; bottom:-1.5rem; right:-1.5rem;
-      background:var(--surf2); border:1px solid var(--border2);
+      background:rgba(0,229,200,.12); border:1.5px solid rgba(0,229,200,.45);
       border-radius:var(--r); padding:1.2rem 1.5rem; text-align:center;
-      backdrop-filter:blur(10px);
+      backdrop-filter:blur(14px);
+      box-shadow:0 0 32px rgba(0,229,200,.15), 0 8px 32px rgba(0,0,0,.4);
     }
     .float-n {
       font-family:var(--display); font-size:2.2rem; font-weight:800;
-      color:var(--cyan); line-height:1;
+      color:#1ffde0; line-height:1;
+      text-shadow:0 0 20px rgba(0,229,200,.6);
     }
-    .float-l { font-size:.72rem; color:var(--dim); margin-top:2px; }
+    .float-l { font-size:.72rem; color:rgba(255,255,255,.75); margin-top:2px; }
     .about-list {
       list-style:none; margin-top:2rem;
       display:grid; grid-template-columns:1fr 1fr; gap:.8rem;
@@ -844,6 +866,7 @@
       font-size:2.5rem; color:var(--cyan);
       line-height:1; margin:1.5rem 0;
       letter-spacing:-.02em;
+      white-space:nowrap;
     }
     .price-period {
       font-size:.85rem; color:var(--muted);
@@ -1009,23 +1032,45 @@
     @media (max-width:900px) {
       .nav-links, .nav-cta { display:none; }
       .nav-ham { display:flex; }
+      .section { padding:70px 5%; }
+      .stats { padding:50px 5%; }
+      #contact { padding:80px 5%; }
       .stats-grid { grid-template-columns:repeat(2,1fr); }
       .svc-grid { grid-template-columns:repeat(2,1fr); }
       .port-grid { grid-template-columns:repeat(2,1fr); }
+      .testi-grid { grid-template-columns:1fr; }
       .about-wrap { grid-template-columns:1fr; gap:48px; }
-      .about-float { bottom:-1rem; right:0; }
+      .about-float { bottom:-0.5rem; right:0; }
+      .about-list { grid-template-columns:1fr; }
       .process-grid { grid-template-columns:repeat(2,1fr); }
       .why-grid { grid-template-columns:repeat(2,1fr); }
-      .foot-top { grid-template-columns:1fr; gap:48px; }
+      .foot-top { grid-template-columns:1fr; gap:40px; }
       .foot-bottom { flex-direction:column; align-items:flex-start; gap:1.2rem; }
+      .pricing-grid { grid-template-columns:1fr; max-width:420px; margin-left:auto; margin-right:auto; }
+      .price-card.featured { transform:none; }
     }
     @media (max-width:580px) {
+      .section { padding:50px 4%; }
+      .stats { padding:40px 4%; }
+      #contact { padding:60px 4%; }
+      .hero { padding:110px 5% 60px; }
+      .hero-wm { display:none; }
+      .scroll-cue { display:none; }
       .svc-grid { grid-template-columns:1fr; }
       .port-grid { grid-template-columns:1fr; }
       .testi-grid { grid-template-columns:1fr; }
       .why-grid { grid-template-columns:1fr; }
       .process-grid { grid-template-columns:1fr; }
       .stats-grid { grid-template-columns:1fr 1fr; }
+      .about-list { grid-template-columns:1fr; }
+      .about-float { position:relative; bottom:auto; right:auto; margin-top:1.5rem; display:inline-block; }
+      .pricing-grid { max-width:100%; }
+      .price-amount { font-size:2.2rem; }
+      .modal { padding:1.5rem; border-radius:18px; }
+      .modal h3 { font-size:1.5rem; }
+      .cta-actions { flex-direction:column; align-items:center; }
+      .cta-email, .cta-call { width:100%; justify-content:center; }
+      .services-head { margin-bottom:2rem; }
     }
 
     /* ─── CURSOR GLOW ─── */
@@ -1643,7 +1688,7 @@
   </div>
   <div class="foot-bottom">
     <div class="foot-loc">Cape Town, South Africa</div>
-    <div>© 2025 BizDynamix. All rights reserved.</div>
+    <div>© 2026 BizDynamix. All rights reserved.</div>
   </div>
 </footer>
 
