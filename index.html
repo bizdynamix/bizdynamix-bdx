@@ -1499,9 +1499,9 @@
     messageModal.setAttribute('aria-hidden', 'true');
   };
 
-  openMessageBtn.addEventListener('click', showModal);
-  openMessageBtnAbout.addEventListener('click', showModal);
-  openMessageBtnBottom.addEventListener('click', showModal);
+  if (openMessageBtn) openMessageBtn.addEventListener('click', showModal);
+  if (openMessageBtnAbout) openMessageBtnAbout.addEventListener('click', showModal);
+  if (openMessageBtnBottom) openMessageBtnBottom.addEventListener('click', showModal);
   modalCloseBtn.addEventListener('click', hideModal);
   messageModal.addEventListener('click', (event) => {
     if (event.target === messageModal) hideModal();
