@@ -1,0 +1,19 @@
+# BizDynamix robots.txt
+# Allows search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow private/admin areas if they exist
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow resources needed for rendering
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /fonts/
+
+# Point to sitemap
+Sitemap: https://bizdynamix.co.za/sitemap.xml
