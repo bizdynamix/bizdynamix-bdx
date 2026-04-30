@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BizDynamix — Digital Growth Agency | Cape Town</title>
-  <meta name="description" content="Cape Town's full-service digital agency. Web design, app development, business automation, AI systems, SEO, and more. 10+ years growing South African businesses online.">
+  <meta name="description" content="Cape Town's full-service digital agency. Web design, app development, AI systems, SEO, and more. 10+ years growing South African businesses online.">
   
   <!-- Canonical URL for SEO -->
   <link rel="canonical" href="https://bizdynamix.co.za/">
   
   <!-- Open Graph Tags for Social Media -->
   <meta property="og:title" content="BizDynamix — Digital Growth Agency">
-  <meta property="og:description" content="Cape Town's full-service digital agency. Web design, e-commerce, mobile apps, business automation, and AI chatbots.">
+  <meta property="og:description" content="Cape Town's full-service digital agency. Web design, e-commerce, mobile apps, and AI chatbots.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bizdynamix.co.za/">
   <meta property="og:image" content="https://bizdynamix.co.za/og-image.jpg">
@@ -20,7 +20,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BizDynamix — Digital Growth Agency | Cape Town">
-  <meta name="twitter:description" content="Web design, app development, business automation, AI systems, and SEO in Cape Town.">
+  <meta name="twitter:description" content="Web design, app development, AI systems, and SEO in Cape Town.">
   
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -28,7 +28,7 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "BizDynamix",
-    "description": "Cape Town's full-service digital agency specializing in web design, e-commerce, mobile app development, business automation, and AI systems.",
+    "description": "Cape Town's full-service digital agency specializing in web design, e-commerce, mobile app development, and AI systems.",
     "url": "https://bizdynamix.co.za/",
     "telephone": "+27-21-XXXXXXX",
     "address": {
@@ -48,8 +48,6 @@
       "Web Design",
       "E-commerce Development",
       "Mobile App Development",
-      "PPC Advertising",
-      "Business Automation",
       "AI Chatbots",
       "SEO"
     ]
@@ -543,6 +541,9 @@
     .svc-card:nth-child(3) .svc-icon { background:rgba(var(--gold-rgb),.1); }
     .svc-card:nth-child(5) .svc-icon { background:rgba(var(--violet-rgb),.1); }
     .svc-card:nth-child(6) .svc-icon { background:rgba(var(--gold-rgb),.1); }
+    /* Hide PPC & Business Automation for planning */
+    .svc-card:nth-child(4),
+    .svc-card:nth-child(5) { display:none; }
     .svc-card:nth-child(8) .svc-icon { background:rgba(var(--gold-rgb),.1); }
     .svc-name {
       font-family:var(--display); font-weight:700;
@@ -840,7 +841,14 @@
       border-radius:1px;
     }
     .foot-col ul { list-style:none; }
-    .foot-col ul li { margin-bottom:.8rem; }
+    .foot-col ul li {
+      margin-bottom:.8rem;
+    }
+    /* Hide PPC & Business Automation from footer */
+    .foot-col:first-of-type ul li:nth-child(4),
+    .foot-col:first-of-type ul li:nth-child(5) {
+      display:none;
+    }
     .foot-col ul li a {
       font-size:.855rem; color:var(--muted);
       transition:all .3s cubic-bezier(.34,.1,.68,.55);
@@ -1040,7 +1048,6 @@
           <option value="Web Design & Development">Web Design & Development</option>
           <option value="E-Commerce Solutions">E-Commerce Solutions</option>
           <option value="App Development">App Development</option>
-          <option value="Business Automation">Business Automation</option>
           <option value="AI Systems">AI Systems</option>
         </select>
       </div>
@@ -1573,7 +1580,7 @@ messageForm.addEventListener('submit', async (event) => {
   /* ─── MARQUEE ITEMS ─── */
   const items = [
     'Web Design', 'E-Commerce', 'App Development',
-    'PPC Ads', 'Business Automation', 'AI Systems',
+    'AI Systems',
   ];
   const track = document.getElementById('marquee');
   // Duplicate for seamless loop
