@@ -1578,7 +1578,7 @@ messageForm.addEventListener('submit', async (event) => {
       if (!heroContent) return;
       const y = window.scrollY;
       heroContent.style.transform = `translateY(${y * 0.28}px)`;
-      heroContent.style.opacity   = Math.max(0, 1 - y / 600).toString();
+      heroContent.style.opacity   = Math.max(0, 1 - y / 1200).toString();
     }, { passive: true });
   }
 
