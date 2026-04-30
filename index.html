@@ -524,6 +524,63 @@
     }
 
     /* ═══════════════════════════════
+       PORTFOLIO
+    ═══════════════════════════════ */
+    .portfolio { padding-bottom:100px; }
+    .section-sub {
+      text-align:center; color:var(--dim); font-size:1rem;
+      max-width:560px; margin:0 auto 3rem; line-height:1.7;
+    }
+    .port-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:24px;
+    }
+    .port-card {
+      display:block; text-decoration:none; color:inherit;
+      background:var(--surf); border:1px solid var(--border);
+      border-radius:var(--r-lg); overflow:hidden;
+      transition:.3s var(--ease);
+    }
+    .port-card:hover {
+      border-color:rgba(var(--violet-rgb),.4);
+      transform:translateY(-6px);
+      box-shadow:0 20px 60px rgba(0,0,0,.4);
+    }
+    .port-img-wrap {
+      position:relative; overflow:hidden;
+      aspect-ratio:16/10; background:var(--surf2);
+    }
+    .port-img-wrap img {
+      width:100%; height:100%; object-fit:cover;
+      display:block;
+      transition:transform .5s var(--ease);
+    }
+    .port-card:hover .port-img-wrap img { transform:scale(1.05); }
+    .port-overlay {
+      position:absolute; inset:0;
+      background:rgba(var(--violet-rgb),.65);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transition:.3s var(--ease);
+    }
+    .port-card:hover .port-overlay { opacity:1; }
+    .port-overlay span {
+      color:#fff; font-family:var(--display);
+      font-weight:700; font-size:1rem; letter-spacing:.04em;
+    }
+    .port-meta {
+      padding:16px 20px 18px;
+    }
+    .port-name {
+      font-family:var(--display); font-weight:700;
+      font-size:1rem; margin-bottom:4px;
+    }
+    .port-tag {
+      font-size:.75rem; color:var(--cyan);
+      font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    }
+
+    /* ═══════════════════════════════
        ABOUT
     ═══════════════════════════════ */
     .about-wrap {
@@ -749,6 +806,7 @@
       .nav-ham { display:flex; }
       .stats-grid { grid-template-columns:repeat(2,1fr); }
       .svc-grid { grid-template-columns:repeat(2,1fr); }
+      .port-grid { grid-template-columns:repeat(2,1fr); }
       .about-wrap { grid-template-columns:1fr; gap:48px; }
       .about-float { bottom:-1rem; right:0; }
       .process-grid { grid-template-columns:repeat(2,1fr); }
@@ -757,6 +815,7 @@
     }
     @media (max-width:580px) {
       .svc-grid { grid-template-columns:1fr; }
+      .port-grid { grid-template-columns:1fr; }
       .testi-grid { grid-template-columns:1fr; }
       .why-grid { grid-template-columns:1fr; }
       .process-grid { grid-template-columns:1fr; }
@@ -838,6 +897,7 @@
   <div class="logo">Biz<em>Dynamix</em></div>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -851,10 +911,11 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mob">
   <button class="mobile-close" id="mobClose">✕</button>
-  <a href="#services" class="mob-link">Services</a>
-  <a href="#about"    class="mob-link">About</a>
-  <a href="#process"  class="mob-link">Process</a>
-  <a href="#contact"  class="mob-link">Contact</a>
+  <a href="#services"  class="mob-link">Services</a>
+  <a href="#portfolio" class="mob-link">Portfolio</a>
+  <a href="#about"     class="mob-link">About</a>
+  <a href="#process"   class="mob-link">Process</a>
+  <a href="#contact"   class="mob-link">Contact</a>
   <a href="#contact" class="btn-main" style="text-align:center;margin-top:1rem;">Get Started →</a>
 </div>
 
@@ -1059,6 +1120,115 @@
         <button id="openMessageBtnAbout" class="btn-main">Work With Us →</button>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ─── PORTFOLIO ─── -->
+<section id="portfolio" class="section portfolio">
+  <div class="section-tag reveal">Our Work</div>
+  <h2 class="section-h reveal">Projects We're Proud Of</h2>
+  <p class="section-sub reveal">A selection of websites, apps and digital platforms we've built for clients across South Africa.</p>
+  <div class="port-grid">
+
+    <a class="port-card reveal reveal-d1" href="https://www.vivounited.org/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://www.vivounited.org/" alt="VIVO United website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">VIVO United</div>
+        <div class="port-tag">Web Design &amp; App</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d2" href="https://www.southernharvest.org.za/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://www.southernharvest.org.za/" alt="Southern Harvest website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">Southern Harvest</div>
+        <div class="port-tag">Web Design</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d3" href="https://artngin.com/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://artngin.com/" alt="ArtNgin website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">ArtNgin</div>
+        <div class="port-tag">Web Design</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d4" href="https://www.amandapool.co.za/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://www.amandapool.co.za/" alt="Amanda Pool website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">Amanda Pool</div>
+        <div class="port-tag">Web Design</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d5" href="https://www.logicrealty.co.za/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://www.logicrealty.co.za/" alt="Logic Realty website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">Logic Realty</div>
+        <div class="port-tag">Web Design &amp; Rentals Platform</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d6" href="https://rentals.logicrealty.co.za/rentals.php" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://rentals.logicrealty.co.za/rentals.php" alt="Logic Realty Rentals platform" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">Logic Realty Rentals</div>
+        <div class="port-tag">Web App</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d1" href="https://www.alwillemseconstruction.co.za/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://www.alwillemseconstruction.co.za/" alt="AL Willemse Construction website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">AL Willemse Construction</div>
+        <div class="port-tag">Web Design</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d2" href="https://toni.co.za/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://toni.co.za/" alt="Toni website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">Toni</div>
+        <div class="port-tag">Web Design</div>
+      </div>
+    </a>
+
+    <a class="port-card reveal reveal-d3" href="https://whalecoastartncraft.co.za/" target="_blank" rel="noreferrer">
+      <div class="port-img-wrap">
+        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://whalecoastartncraft.co.za/" alt="Whale Coast Art n Craft website" loading="lazy">
+        <div class="port-overlay"><span>View Site →</span></div>
+      </div>
+      <div class="port-meta">
+        <div class="port-name">Whale Coast Art &amp; Craft</div>
+        <div class="port-tag">Web Design &amp; E-Commerce</div>
+      </div>
+    </a>
+
   </div>
 </section>
 
