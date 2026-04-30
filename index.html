@@ -296,14 +296,15 @@
     }
     .cta-email:hover { background:#fff; transform:translateY(-2px); box-shadow:0 12px 40px rgba(var(--cyan-rgb),.3); }
     .cta-call {
-      border:2px solid var(--violet); color:var(--violet);
+      background:var(--violet); color:#fff;
       padding:15px 32px; border-radius:50px;
       font-weight:600; font-size:.95rem;
       transition:.25s var(--ease);
       display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
+      border:none;
     }
-    .cta-call:hover { background:var(--violet); color:#fff; box-shadow:0 8px 32px rgba(var(--violet-rgb),.35); transform:translateY(-2px); }
+    .cta-call:hover { background:#fff; color:var(--violet); box-shadow:0 8px 32px rgba(var(--violet-rgb),.35); transform:translateY(-2px); }
     .btn-main {
       background:var(--cyan); color:#000;
       padding:15px 34px; border-radius:50px;
@@ -754,14 +755,13 @@
     }
     .cta-email:hover { background:#fff; transform:translateY(-2px); box-shadow:0 12px 40px rgba(var(--cyan-rgb),.3); }
     .cta-call {
-      border:2px solid var(--violet); color:var(--violet);
+      background:var(--violet); color:#fff;
       padding:15px 32px; border-radius:50px;
       font-weight:600; font-size:.95rem;
       transition:.25s var(--ease);
+      border:none;
     }
-    .cta-call:hover { background:var(--violet); color:#fff; box-shadow:0 8px 32px rgba(var(--violet-rgb),.35); transform:translateY(-2px); }
-
-    /* ═══════════════════════════════
+    .cta-call:hover { background:#fff; color:var(--violet); box-shadow:0 8px 32px rgba(var(--violet-rgb),.35); transform:translateY(-2px); }
        FOOTER
     ═══════════════════════════════ */
     footer {
@@ -836,14 +836,14 @@
     /* ─── HERO VIDEO ─── */
     .hero-vid {
       position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; z-index:0; opacity:.38; pointer-events:none;
+      object-fit:cover; z-index:0; opacity:.55; pointer-events:none;
     }
     .hero-overlay {
       position:absolute; inset:0; z-index:1; pointer-events:none;
       background:linear-gradient(180deg,
-        rgba(9,9,15,.6) 0%,
-        rgba(9,9,15,.4) 40%,
-        rgba(9,9,15,.88) 100%);
+        rgba(9,9,15,.5) 0%,
+        rgba(9,9,15,.3) 40%,
+        rgba(9,9,15,.8) 100%);
     }
     .hero-content {
       position:relative; z-index:2;
@@ -926,8 +926,8 @@
 
   <!-- Background video -->
   <video class="hero-vid" autoplay muted loop playsinline aria-hidden="true">
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-futuristic-blue-technology-particles-47645-large.mp4" type="video/mp4">
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-tech-circuit-board-on-dark-background-26440-large.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/8730098/8730098-sd_506_720_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/6980213/6980213-sd_640_360_25fps.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay" aria-hidden="true"></div>
 
@@ -1572,30 +1572,19 @@ messageForm.addEventListener('submit', async (event) => {
   const _openChatBtn    = document.getElementById('openChatBtn');
   const _openChatBtnBot = document.getElementById('openChatBtnBottom');
 
-  const BOT = {
-    hello:   "Hi there! 👋 I'm the BizDynamix virtual assistant. Ask me about our services, pricing, or how we can help your business grow.",
-    web:     "We build stunning, fast, mobile-first websites tailored to your brand — from simple landing pages to complex portals. Send us a message to get a free quote!",
-    ecom:    "Our e-commerce solutions cover storefront design, secure payments, and inventory. We work with WooCommerce, Shopify, and fully custom builds.",
-    app:     "We develop iOS, Android, and cross-platform apps. Tell us about your idea and we'll map out a build plan.",
-    ppc:     "Our PPC service covers Google Ads, Meta, and LinkedIn. We maximise every rand of your ad spend with data-driven targeting.",
-    auto:    "We design custom business automation workflows — CRM integrations, automated reporting, API connections, and more.",
-    ai:      "We build custom AI chatbots, intelligent agents, and ML integrations that give your business a genuine competitive edge.",
-    price:   "Pricing depends on scope and service. Click 'Send a Message' for a tailored quote — no hard sell, just honest advice.",
-    contact: "Reach us at info@bizdynamix.co.za, or click 'Send a Message' to drop us a quick note.",
-    fallback:"Great question! We specialise in web design, e-commerce, app development, PPC advertising, business automation, and AI systems. What would you like to know more about?"
-  };
-  const getBotReply = (t) => {
-    t = t.toLowerCase();
-    if (/hello|hi|hey|howzit/.test(t))                        return BOT.hello;
-    if (/web|website|design|landing|page/.test(t))            return BOT.web;
-    if (/shop|ecommerce|e-commerce|store|shopify|woo/.test(t))return BOT.ecom;
-    if (/app|mobile|ios|android|pwa/.test(t))                 return BOT.app;
-    if (/ppc|advert|google ad|meta ad|paid|campaign/.test(t)) return BOT.ppc;
-    if (/automat|workflow|integrat|crm/.test(t))              return BOT.auto;
-    if (/ai|chatbot|intelligence|ml/.test(t))                 return BOT.ai;
-    if (/price|cost|quote|how much|rate/.test(t))             return BOT.price;
-    if (/contact|email|call|reach|speak/.test(t))             return BOT.contact;
-    return BOT.fallback;
+  const getBotReply = async (userText) => {
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userText })
+      });
+      const data = await res.json();
+      return data.reply || 'Sorry, I couldn\'t process that. Try asking about web design, e-commerce, apps, PPC, or pricing.';
+    } catch (e) {
+      console.error('Chat API error:', e);
+      return 'I\'m having trouble connecting. Please use the contact form instead.';
+    }
   };
 
   let _chatModal, _chatMsgs, _chatInput;
@@ -1622,11 +1611,15 @@ messageForm.addEventListener('submit', async (event) => {
     _chatInput = document.getElementById('_chatIn');
     document.getElementById('_chatClose').addEventListener('click', _hideChat);
     _chatModal.addEventListener('click', (e) => { if (e.target === _chatModal) _hideChat(); });
-    document.getElementById('_chatFrm').addEventListener('submit', (e) => {
+    document.getElementById('_chatFrm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = _chatInput.value.trim(); if (!text) return;
       _appendMsg(text,'user'); _chatInput.value = '';
-      setTimeout(() => _appendMsg(getBotReply(text),'bot'), 420);
+      _chatInput.disabled = true;
+      const reply = await getBotReply(text);
+      _appendMsg(reply, 'bot');
+      _chatInput.disabled = false;
+      _chatInput.focus();
     });
     _appendMsg("Hi! 👋 I'm the BizDynamix virtual assistant. How can I help you today?", 'bot');
   };
