@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Work — BizDynamix</title>
+  <meta name="description" content="Real projects for real South African businesses. See how BizDynamix builds digital systems that work.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #09090f;
+      --surf:       #111119;
+      --surf2:      #18182a;
+      --border:     rgba(255,255,255,0.07);
+      --border2:    rgba(255,255,255,0.12);
+      --text:       #eeeef6;
+      --muted:      #9ca3af;
+      --dim:        #6b7280;
+      --cyan:       #00e5c8;
+      --cyan-rgb:   0,229,200;
+      --violet:     #7c6cf5;
+      --violet-rgb: 124,108,245;
+      --gold:       #f5c518;
+      --gold-rgb:   245,197,24;
+      --display:    'Syne', sans-serif;
+      --body:       'DM Sans', sans-serif;
+      --ease:       cubic-bezier(.4,0,.2,1);
+      --r:          14px;
+      --r-lg:       22px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: .5;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(var(--cyan-rgb),.3); border-radius: 4px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 22px 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: .4s var(--ease);
+    }
+    nav.stuck {
+      padding: 14px 6%;
+      background: rgba(9,9,15,.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-family: var(--display); font-weight: 800; font-size: 1.25rem; letter-spacing: -.03em; }
+    .logo em { color: var(--cyan); font-style: normal; }
+    .nav-cta {
+      background: var(--cyan); color: #000;
+      padding: 10px 24px; border-radius: 50px;
+      font-weight: 700; font-size: .85rem;
+      font-family: var(--display);
+      transition: .25s var(--ease);
+    }
+    .nav-cta:hover { background: #fff; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 72vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 160px 6% 100px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+    .glow-left {
+      position: absolute; top: -200px; left: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--cyan-rgb),.08) 0%, transparent 70%);
+      filter: blur(80px); pointer-events: none;
+    }
+    .glow-right {
+      position: absolute; bottom: -150px; right: -150px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--violet-rgb),.08) 0%, transparent 70%);
+      filter: blur(80px); pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(var(--cyan-rgb),.08);
+      border: 1px solid rgba(var(--cyan-rgb),.2);
+      padding: 7px 18px; border-radius: 50px;
+      font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 2rem;
+      position: relative; z-index: 1;
+      animation: fadeUp .8s var(--ease) both;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan); animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .4; transform: scale(1.6); }
+    }
+    .hero h1 {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: .93; letter-spacing: -.04em;
+      margin-bottom: 1.8rem;
+      position: relative; z-index: 1;
+      animation: fadeUp .8s .15s var(--ease) both;
+    }
+    .hero h1 .l1 { display: block; color: var(--text); }
+    .hero h1 .l2 {
+      display: block;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(.95rem, 1.8vw, 1.1rem);
+      color: var(--muted); font-weight: 300;
+      max-width: 480px; margin: 0 auto;
+      line-height: 1.9;
+      position: relative; z-index: 1;
+      animation: fadeUp .8s .3s var(--ease) both;
+    }
+
+    /* ── CASE STUDIES ── */
+    .cases { padding: 40px 0 80px; }
+
+    .case {
+      margin: 0 6%; padding: 100px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .case:last-child { border-bottom: none; }
+    .case.flip { direction: rtl; }
+    .case.flip > * { direction: ltr; }
+
+    .case-visual { position: sticky; top: 110px; }
+    .case-frame {
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    .frame-realty  { background: linear-gradient(135deg, rgba(var(--cyan-rgb),.07), rgba(var(--violet-rgb),.04)); }
+    .frame-gin     { background: linear-gradient(135deg, rgba(var(--gold-rgb),.07), rgba(var(--violet-rgb),.04)); }
+    .frame-arch    { background: linear-gradient(135deg, rgba(var(--violet-rgb),.07), rgba(var(--cyan-rgb),.04)); }
+
+    .frame-wm {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(5rem, 10vw, 9rem); letter-spacing: -.05em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.06);
+      user-select: none; pointer-events: none;
+      white-space: nowrap;
+    }
+    .case-chip {
+      position: absolute;
+      background: rgba(17,17,25,.92);
+      border: 1px solid var(--border2);
+      border-radius: var(--r); padding: .85rem 1.1rem;
+      backdrop-filter: blur(12px);
+    }
+    .case-chip.tr { top: 1.4rem; right: 1.4rem; }
+    .case-chip.bl { bottom: 1.4rem; left: 1.4rem; }
+    .chip-label { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-bottom: 3px; }
+    .chip-val   { font-family: var(--display); font-weight: 700; font-size: .88rem; color: var(--cyan); }
+
+    .case-num {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(4rem, 6vw, 6rem); line-height: 1;
+      color: rgba(var(--cyan-rgb),.07); margin-bottom: .3rem;
+    }
+    .case-sector {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+    .case-sector::before { content: ''; width: 20px; height: 1px; background: var(--cyan); }
+    .case-title {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.05; letter-spacing: -.03em;
+      margin-bottom: .75rem;
+    }
+    .case-client {
+      font-size: .78rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 2rem;
+    }
+    .case-problem {
+      background: var(--surf); border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: var(--r); padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .problem-label {
+      font-size: .65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .12em;
+      color: var(--dim); margin-bottom: .5rem;
+    }
+    .problem-text { font-size: .88rem; color: var(--muted); line-height: 1.8; }
+    .case-body { font-size: .95rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+    .case-tags {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem;
+    }
+    .tag {
+      padding: 5px 14px; border-radius: 50px;
+      font-size: .7rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border2); color: var(--muted);
+    }
+    .case-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--cyan); font-weight: 700; font-size: .9rem;
+      font-family: var(--display);
+      transition: gap .25s var(--ease);
+    }
+    .case-link:hover { gap: 16px; }
+    .case-link-arrow { transition: transform .25s var(--ease); }
+    .case-link:hover .case-link-arrow { transform: translateX(4px); }
+
+    /* ── TONI CALLOUT (personal brand aside) ── */
+    .aside-strip {
+      margin: 0 6% 0;
+      background: var(--surf); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2.5rem 3rem;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 2rem; align-items: center;
+    }
+    .aside-tag {
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--dim); margin-bottom: .6rem;
+    }
+    .aside-title {
+      font-family: var(--display); font-weight: 800;
+      font-size: 1.3rem; letter-spacing: -.02em; margin-bottom: .5rem;
+    }
+    .aside-body { font-size: .875rem; color: var(--muted); line-height: 1.75; }
+    .aside-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border2); color: var(--text);
+      padding: 12px 24px; border-radius: 50px;
+      font-weight: 600; font-size: .85rem; font-family: var(--display);
+      white-space: nowrap;
+      transition: .25s var(--ease);
+    }
+    .aside-link:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.04); }
+
+    /* ── CTA ── */
+    .cta-section {
+      margin: 80px 6% 0;
+      background: var(--surf); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 80px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(var(--cyan-rgb),.04) 0%, rgba(var(--violet-rgb),.04) 100%);
+    }
+    .cta-section > * { position: relative; z-index: 1; }
+    .cta-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem;
+    }
+    .cta-section h2 {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: -.035em; line-height: 1.05; margin-bottom: 1.2rem;
+    }
+    .cta-section h2 span {
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .cta-section p {
+      font-size: 1rem; color: var(--muted);
+      max-width: 420px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.85;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--cyan); color: #000;
+      padding: 16px 40px; border-radius: 50px;
+      font-weight: 700; font-size: .95rem;
+      font-family: var(--display);
+      transition: .25s var(--ease);
+    }
+    .cta-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(var(--cyan-rgb),.3); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 6%;
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .foot-copy { font-size: .78rem; color: var(--dim); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: .1s; }
+    .reveal-d2 { transition-delay: .2s; }
+    .reveal-d3 { transition-delay: .3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .case { grid-template-columns: 1fr; gap: 2.5rem; padding: 60px 0; }
+      .case.flip { direction: ltr; }
+      .case-visual { position: relative; top: 0; }
+      .aside-strip { grid-template-columns: 1fr; }
+      .cta-section { padding: 50px 2rem; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 130px 5% 80px; }
+      .case { margin: 0 5%; }
+      .aside-strip { margin: 0 5%; padding: 2rem; }
+      .cta-section { margin: 60px 5% 0; }
+      footer { padding: 32px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="https://www.bizdynamix.co.za" class="logo">Biz<em>Dynamix</em></a>
+  <a href="https://www.bizdynamix.co.za/#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<section class="hero">
+  <div class="glow-left"></div>
+  <div class="glow-right"></div>
+  <div class="hero-tag">Real Work · South Africa</div>
+  <h1>
+    <span class="l1">We Don't Show</span>
+    <span class="l2">Mockups.</span>
+  </h1>
+  <p class="hero-sub">Three real projects. Three real businesses. Here's exactly how we approach digital problems — and why we build systems, not just websites.</p>
+</section>
+
+<div class="cases">
+
+  <!-- ── CASE 01: LOGIC REALTY ── -->
+  <div class="case reveal">
+    <div class="case-visual">
+      <div class="case-frame frame-realty">
+        <div class="frame-wm">LR</div>
+        <div class="case-chip tr">
+          <div class="chip-label">Project Type</div>
+          <div class="chip-val">Dual Platform</div>
+        </div>
+        <div class="case-chip bl">
+          <div class="chip-label">Stack</div>
+          <div class="chip-val">HTML · PHP · MySQL</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="case-num">01</div>
+      <div class="case-sector">Real Estate</div>
+      <h2 class="case-title">One Brand.<br>Two Digital Systems.</h2>
+      <div class="case-client">Logic Realty — Hermanus & Overberg</div>
+      <div class="case-problem">
+        <div class="problem-label">The Problem</div>
+        <p class="problem-text">A growing real estate agency needed more than a brochure site. They needed a marketing platform that generated leads and a live rental listings system their agents could manage daily — without paying ongoing licensing fees for software that didn't fit their workflow.</p>
+      </div>
+      <p class="case-body">We built two interconnected systems: a full marketing website with lead capture and a free seller's guide funnel, alongside a custom PHP and MySQL rental listings platform with agent login, live property management, and dynamically served listing pages. Both live under the same brand. Neither required a monthly SaaS subscription. The property platform currently manages live rental stock across Hermanus and the Overberg with zero third-party dependency.</p>
+      <div class="case-tags">
+        <span class="tag">Web Design</span>
+        <span class="tag">Custom App Dev</span>
+        <span class="tag">PHP / MySQL</span>
+        <span class="tag">Lead Generation</span>
+        <span class="tag">Property Tech</span>
+      </div>
+      <a href="https://www.logicrealty.co.za" target="_blank" rel="noreferrer" class="case-link">
+        View Live Site <span class="case-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── CASE 02: ART & GIN ── -->
+  <div class="case flip reveal reveal-d1">
+    <div class="case-visual">
+      <div class="case-frame frame-gin">
+        <div class="frame-wm">A&G</div>
+        <div class="case-chip tr">
+          <div class="chip-label">Project Type</div>
+          <div class="chip-val">Brand + Commerce</div>
+        </div>
+        <div class="case-chip bl">
+          <div class="chip-label">Stack</div>
+          <div class="chip-val">WordPress · Custom</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="case-num">02</div>
+      <div class="case-sector">Artisan · Premium FMCG</div>
+      <h2 class="case-title">When the Product<br>Has a Soul.</h2>
+      <div class="case-client">Art & Gin — Premium SA Gin Brand</div>
+      <div class="case-problem">
+        <div class="problem-label">The Problem</div>
+        <p class="problem-text">Art & Gin is built around a story — an artisanal gin whose label carries original artwork by celebrated South African artist Portchie. The product needed a digital home that honoured that story without drowning it in a generic e-commerce template.</p>
+      </div>
+      <p class="case-body">We built the site around the brand narrative, not the product catalogue. The artwork leads. The gin's origin, the artist's hand, the craft of distillation — these are the architecture of the experience, not an afterthought buried in an About page. Order functionality is present and seamless, but it exists in service of the story. The site makes you want the product before it even asks you to buy it.</p>
+      <div class="case-tags">
+        <span class="tag">Brand Identity</span>
+        <span class="tag">Web Design</span>
+        <span class="tag">E-Commerce</span>
+        <span class="tag">Storytelling</span>
+        <span class="tag">Order System</span>
+      </div>
+      <a href="https://artngin.com" target="_blank" rel="noreferrer" class="case-link">
+        View Live Site <span class="case-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── CASE 03: VUE ARCHITECTURE ── -->
+  <div class="case reveal reveal-d2">
+    <div class="case-visual">
+      <div class="case-frame frame-arch">
+        <div class="frame-wm">VUE</div>
+        <div class="case-chip tr">
+          <div class="chip-label">Project Type</div>
+          <div class="chip-val">Professional Services</div>
+        </div>
+        <div class="case-chip bl">
+          <div class="chip-label">Stack</div>
+          <div class="chip-val">WordPress · Custom Theme</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="case-num">03</div>
+      <div class="case-sector">Architecture · Design</div>
+      <h2 class="case-title">A Design Firm's<br>Digital Statement.</h2>
+      <div class="case-client">VUE Architecture & Associates</div>
+      <div class="case-problem">
+        <div class="problem-label">The Problem</div>
+        <p class="problem-text">An architecture firm whose work includes cutting-edge 3D visualisation and bespoke residential design cannot have a website that looks like it came from a template library. Their online presence had to be as considered as their buildings.</p>
+      </div>
+      <p class="case-body">We built a portfolio-first site where the work leads. 3D renders and project photography are treated with editorial weight — not shoved into a gallery grid. Services are clear. The contact path is direct. The result is a site that communicates the firm's design sensibility before a word is read, which is exactly how a design firm should be judged by a prospective client.</p>
+      <div class="case-tags">
+        <span class="tag">Web Design</span>
+        <span class="tag">Portfolio</span>
+        <span class="tag">Lead Generation</span>
+        <span class="tag">3D Visualisation</span>
+        <span class="tag">WordPress</span>
+      </div>
+      <a href="https://www.vuearch.co.za" target="_blank" rel="noreferrer" class="case-link">
+        View Live Site <span class="case-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── PERSONAL BRAND ASIDE ── -->
+<div class="aside-strip reveal">
+  <div>
+    <div class="aside-tag">Also Worth Noting</div>
+    <div class="aside-title">Personal Brand — Toni Enderli</div>
+    <p class="aside-body">Toni is simultaneously an extreme open-water swimmer (Oceans 7 pursuit), a qualified property expert, and a motivational speaker. One website. Three distinct audiences. The challenge was building a digital presence that holds all three without diluting any of them.</p>
+  </div>
+  <a href="https://toni.co.za" target="_blank" rel="noreferrer" class="aside-link">View Site →</a>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-section reveal">
+  <div class="cta-tag">— Let's Build</div>
+  <h2>Ready for a System<br><span>That Actually Works?</span></h2>
+  <p>No templates. No generic packages. Just a digital solution built around what your business specifically needs to grow.</p>
+  <a href="https://www.bizdynamix.co.za/#contact" class="cta-btn">Start the Conversation</a>
+</div>
+
+<footer>
+  <a href="https://www.bizdynamix.co.za" class="logo">Biz<em>Dynamix</em></a>
+  <div class="foot-copy">Cape Town, South Africa &nbsp;·&nbsp; © 2026 BizDynamix</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('stuck', window.scrollY > 60);
+  }, { passive: true });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
