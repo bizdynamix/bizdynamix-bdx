@@ -58,81 +58,82 @@ echo json_encode(['success' => $sent]);
 function buildInternalEmail($name, $email, $service, $mobile, $message, $wa_link) {
     $time   = date('d M Y · H:i');
     $wa_btn = $wa_link
-        ? "<a href='{$wa_link}' style='display:inline-block;background:#00e5c8;color:#000000;padding:13px 30px;border-radius:50px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:0.03em;'>WhatsApp {$name} →</a>"
-        : "<span style='font-size:13px;color:#6b7280;font-family:Arial,sans-serif;'>No mobile provided</span>";
+        ? "<a href='{$wa_link}' style='display:inline-block;background:#00e5c8;color:#000000;padding:14px 32px;border-radius:50px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:0.03em;box-shadow:0 8px 24px rgba(0,229,200,0.25);'>📱 WhatsApp {$name}</a>"
+        : "<span style='font-size:13px;color:#9ca3af;font-family:Arial,sans-serif;'>No mobile number provided</span>";
 
     $row = function($label, $value) {
         return "
         <tr>
-          <td style='padding:18px 0;width:38%;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.06);'>
-            <span style='font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#6b7280;font-family:Arial,Helvetica,sans-serif;'>{$label}</span>
+          <td style='padding:20px 0;width:35%;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.04);'>
+            <span style='font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#6b7280;font-family:Arial,Helvetica,sans-serif;'>{$label}</span>
           </td>
-          <td style='padding:18px 0;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.06);'>
-            <span style='font-size:14px;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;line-height:1.7;'>{$value}</span>
+          <td style='padding:20px 0;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.04);padding-left:24px;'>
+            <span style='font-size:15px;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;line-height:1.6;'>{$value}</span>
           </td>
         </tr>";
     };
 
     $email_display = $email !== 'Not provided'
-        ? "<a href='mailto:{$email}' style='color:#00e5c8;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:14px;'>{$email}</a>"
-        : "<span style='color:#6b7280;font-size:14px;font-family:Arial,sans-serif;'>Not provided</span>";
+        ? "<a href='mailto:{$email}' style='color:#00e5c8;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:600;'>{$email}</a>"
+        : "<span style='color:#6b7280;font-size:15px;font-family:Arial,sans-serif;'>Not provided</span>";
 
     return <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#09090f;">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#09090f;padding:40px 16px;">
+<body style="margin:0;padding:0;background:#09090f;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#09090f;padding:48px 20px;">
 <tr><td align="center">
-<table width="580" cellpadding="0" cellspacing="0" border="0" style="max-width:580px;width:100%;">
+<table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
 
-  <!-- Header -->
-  <tr><td style="background:#111119;border:1px solid rgba(255,255,255,0.08);border-radius:18px 18px 0 0;padding:36px 44px 28px;text-align:center;">
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00e5c8;font-family:Arial,Helvetica,sans-serif;margin-bottom:14px;">New Website Enquiry</div>
-    <div style="font-size:26px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;">Biz<span style="color:#00e5c8;">Dynamix</span></div>
-    <div style="width:36px;height:2px;background:#00e5c8;margin:16px auto 0;"></div>
+  <!-- Header with gradient accent -->
+  <tr><td style="background:linear-gradient(135deg, rgba(0,229,200,0.05) 0%, rgba(124,108,245,0.05) 100%);border:1px solid rgba(0,229,200,0.15);border-radius:22px 22px 0 0;padding:48px 40px 36px;text-align:center;border-bottom:2px solid rgba(0,229,200,0.3);">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#00e5c8;margin-bottom:16px;">New Lead</div>
+    <div style="font-size:32px;font-weight:800;color:#eeeef6;letter-spacing:-0.03em;margin-bottom:6px;">Biz<span style='color:#00e5c8;'>Dynamix</span></div>
+    <div style="height:3px;background:linear-gradient(90deg, #00e5c8 0%, #7c6cf5 100%);width:48px;margin:0 auto;border-radius:2px;"></div>
   </td></tr>
 
-  <!-- Lead name banner -->
-  <tr><td style="background:rgba(0,229,200,0.06);border-left:1px solid rgba(255,255,255,0.08);border-right:1px solid rgba(255,255,255,0.08);padding:22px 44px;">
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#6b7280;font-family:Arial,Helvetica,sans-serif;margin-bottom:6px;">Lead</div>
-    <div style="font-size:24px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.02em;">{$name}</div>
-    <div style="font-size:12px;color:#6b7280;font-family:Arial,Helvetica,sans-serif;margin-top:4px;">{$time}</div>
+  <!-- Lead info banner -->
+  <tr><td style="background:rgba(0,229,200,0.08);border-left:1px solid rgba(0,229,200,0.15);border-right:1px solid rgba(0,229,200,0.15);padding:28px 40px;border-bottom:1px solid rgba(255,255,255,0.04);">
+    <div style='font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#00e5c8;margin-bottom:8px;'>Lead Name</div>
+    <div style="font-size:28px;font-weight:800;color:#eeeef6;letter-spacing:-0.025em;line-height:1.2;">{$name}</div>
+    <div style="font-size:12px;color:#6b7280;margin-top:8px;">📅 {$time}</div>
   </td></tr>
 
-  <!-- Details -->
-  <tr><td style="background:#111119;border-left:1px solid rgba(255,255,255,0.08);border-right:1px solid rgba(255,255,255,0.08);padding:0 44px;">
+  <!-- Content sections -->
+  <tr><td style="background:#111119;border-left:1px solid rgba(0,229,200,0.15);border-right:1px solid rgba(0,229,200,0.15);padding:32px 40px;">
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
-      {$row('Service', $service)}
+      {$row('Service Interested In', $service)}
       <tr>
-        <td style="padding:18px 0;width:38%;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.06);">
-          <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#6b7280;font-family:Arial,Helvetica,sans-serif;">Email</span>
+        <td style='padding:20px 0;width:35%;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.04);'>
+          <span style='font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#6b7280;'>Email Address</span>
         </td>
-        <td style="padding:18px 0;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.06);">
+        <td style='padding:20px 0;vertical-align:top;border-bottom:1px solid rgba(255,255,255,0.04);padding-left:24px;'>
           {$email_display}
         </td>
       </tr>
-      {$row('WhatsApp / Mobile', $mobile)}
+      {$row('Contact Number', $mobile)}
       <tr>
-        <td style="padding:18px 0;width:38%;vertical-align:top;">
-          <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#6b7280;font-family:Arial,Helvetica,sans-serif;">Message</span>
+        <td style='padding:20px 0;width:35%;vertical-align:top;'>
+          <span style='font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#6b7280;'>Message</span>
         </td>
-        <td style="padding:18px 0;vertical-align:top;">
-          <span style="font-size:14px;color:#9ca3af;font-family:Arial,Helvetica,sans-serif;line-height:1.75;">{$message}</span>
+        <td style='padding:20px 0;vertical-align:top;padding-left:24px;'>
+          <span style='font-size:14px;color:#9ca3af;line-height:1.8;'>{$message}</span>
         </td>
       </tr>
     </table>
   </td></tr>
 
-  <!-- WhatsApp CTA -->
-  <tr><td style="background:#18182a;border:1px solid rgba(255,255,255,0.08);border-top:none;border-radius:0 0 18px 18px;padding:28px 44px;text-align:center;">
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#6b7280;font-family:Arial,Helvetica,sans-serif;margin-bottom:14px;">Quick Action</div>
+  <!-- CTA Section -->
+  <tr><td style="background:linear-gradient(135deg, rgba(0,229,200,0.1) 0%, rgba(124,108,245,0.08) 100%);border-left:1px solid rgba(0,229,200,0.15);border-right:1px solid rgba(0,229,200,0.15);border-bottom:1px solid rgba(0,229,200,0.15);border-radius:0 0 22px 22px;padding:36px 40px;text-align:center;">
+    <div style='font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#00e5c8;margin-bottom:16px;'>Quick Response</div>
     {$wa_btn}
   </td></tr>
 
-  <!-- Meta -->
-  <tr><td style="padding:20px 0;text-align:center;">
-    <span style="font-size:11px;color:#374151;font-family:Arial,Helvetica,sans-serif;">Sent by the BizDynamix contact form &nbsp;·&nbsp; bizdynamix.co.za</span>
+  <!-- Footer -->
+  <tr><td style="padding:28px 40px;text-align:center;border-top:1px solid rgba(255,255,255,0.04);margin-top:8px;">
+    <span style='font-size:12px;color:#6b7280;'>Contact received at bizdynamix.co.za</span><br>
+    <span style='font-size:11px;color:#4b5563;margin-top:8px;display:block;'>Cape Town, South Africa · © 2026 BizDynamix</span>
   </td></tr>
 
 </table>
@@ -154,77 +155,73 @@ function buildClientEmail($name, $service) {
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f0f0f5;">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f0f5;padding:40px 16px;">
+<body style="margin:0;padding:0;background:#09090f;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#09090f;padding:48px 20px;">
 <tr><td align="center">
-<table width="580" cellpadding="0" cellspacing="0" border="0" style="max-width:580px;width:100%;">
+<table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
 
-  <!-- Header bar -->
-  <tr><td style="background:#09090f;border-radius:18px 18px 0 0;padding:32px 48px;text-align:center;">
-    <div style="font-size:22px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;">
+  <!-- Header bar with gradient -->
+  <tr><td style="background:linear-gradient(135deg, rgba(0,229,200,0.1) 0%, rgba(124,108,245,0.08) 100%);border:1px solid rgba(0,229,200,0.15);border-radius:22px 22px 0 0;padding:44px 40px;text-align:center;">
+    <div style="font-size:24px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;">
       Biz<span style="color:#00e5c8;">Dynamix</span>
     </div>
-    <div style="width:32px;height:2px;background:#00e5c8;margin:14px auto 0;"></div>
+    <div style="height:3px;background:linear-gradient(90deg, #00e5c8 0%, #7c6cf5 100%);width:48px;margin:16px auto 0;border-radius:2px;"></div>
   </td></tr>
 
   <!-- Body -->
-  <tr><td style="background:#ffffff;padding:48px;border-left:1px solid #e5e7eb;border-right:1px solid #e5e7eb;">
+  <tr><td style="background:#111119;padding:48px;border-left:1px solid rgba(0,229,200,0.15);border-right:1px solid rgba(0,229,200,0.15);">
 
     <!-- Greeting -->
-    <div style="font-size:28px;font-weight:800;color:#0d0d18;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;line-height:1.15;margin-bottom:20px;">
+    <div style="font-size:28px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;line-height:1.15;margin-bottom:24px;">
       Got it, {$first}.
     </div>
 
-    <p style="font-size:15px;color:#4b5563;font-family:Arial,Helvetica,sans-serif;line-height:1.8;margin:0 0 18px;">
-      Your enquiry about <strong style="color:#0d0d18;">{$service}</strong> is in. Someone on our team will be in touch within <strong style="color:#0d0d18;">24 hours</strong> — not with a proposal you didn't ask for, but to understand what you're actually trying to build.
+    <p style="font-size:15px;color:#9ca3af;font-family:Arial,Helvetica,sans-serif;line-height:1.8;margin:0 0 20px;">
+      Your enquiry about <span style='color:#00e5c8;font-weight:600;'>{$service}</span> is in. Someone on our team will be in touch within <span style='color:#00e5c8;font-weight:600;'>24 hours</span> — not with a proposal you didn't ask for, but to understand what you're actually trying to build.
     </p>
 
-    <p style="font-size:15px;color:#4b5563;font-family:Arial,Helvetica,sans-serif;line-height:1.8;margin:0 0 40px;">
+    <p style="font-size:15px;color:#9ca3af;font-family:Arial,Helvetica,sans-serif;line-height:1.8;margin:0 0 48px;">
       We've been building digital systems for South African businesses for over a decade. When we reach out, the first conversation is about your business — not ours.
     </p>
 
     <!-- Divider -->
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:36px;">
-      <tr><td style="border-top:1px solid #e5e7eb;font-size:0;">&nbsp;</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:40px;">
+      <tr><td style="border-top:1px solid rgba(0,229,200,0.1);font-size:0;">&nbsp;</td></tr>
     </table>
 
-    <!-- Upsell block -->
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#9ca3af;font-family:Arial,Helvetica,sans-serif;margin-bottom:14px;">While You Wait</div>
+    <!-- Portfolio preview block -->
+    <div style="background:linear-gradient(135deg, rgba(0,229,200,0.08) 0%, rgba(124,108,245,0.08) 100%);border:1px solid rgba(0,229,200,0.15);border-radius:16px;padding:32px;margin-bottom:24px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#00e5c8;margin-bottom:12px;">While You Wait</div>
 
-    <div style="font-size:19px;font-weight:800;color:#0d0d18;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.025em;line-height:1.25;margin-bottom:12px;">
-      See how we've built real digital systems for SA businesses.
+      <div style="font-size:20px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.025em;line-height:1.3;margin-bottom:14px;">
+        See real projects for real SA businesses.
+      </div>
+
+      <p style="font-size:14px;color:#9ca3af;font-family:Arial,Helvetica,sans-serif;line-height:1.75;margin:0 0 24px;">
+        A property tech platform built from scratch. A premium gin brand with the artist at the centre. An architecture firm's digital presence as considered as their buildings.
+      </p>
+
+      <!-- Portfolio CTA button -->
+      <a href="https://www.bizdynamix.co.za/portfolio.html"
+         style="display:inline-block;padding:14px 28px;font-size:14px;font-weight:700;background:#00e5c8;color:#000000;font-family:Arial,Helvetica,sans-serif;text-decoration:none;letter-spacing:0.02em;border-radius:50px;box-shadow:0 8px 24px rgba(0,229,200,0.25);">
+        View Our Work →
+      </a>
     </div>
-
-    <p style="font-size:14px;color:#6b7280;font-family:Arial,Helvetica,sans-serif;line-height:1.8;margin:0 0 28px;">
-      A property tech platform built from scratch. A premium gin brand with the artist at the centre. An architecture firm's digital presence as considered as their buildings. Three projects, three problems, zero templates.
-    </p>
-
-    <!-- Portfolio CTA button -->
-    <table cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td style="background:#09090f;border-radius:50px;">
-          <a href="https://www.bizdynamix.co.za/portfolio.html"
-             style="display:inline-block;padding:15px 36px;font-size:14px;font-weight:700;color:#00e5c8;font-family:Arial,Helvetica,sans-serif;text-decoration:none;letter-spacing:0.02em;">
-            View Our Work →
-          </a>
-        </td>
-      </tr>
-    </table>
 
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="background:#09090f;border-radius:0 0 18px 18px;padding:28px 48px;">
+  <tr><td style="background:linear-gradient(135deg, rgba(0,229,200,0.05) 0%, rgba(124,108,245,0.05) 100%);border-left:1px solid rgba(0,229,200,0.15);border-right:1px solid rgba(0,229,200,0.15);border-bottom:1px solid rgba(0,229,200,0.15);border-radius:0 0 22px 22px;padding:32px 48px;">
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td>
           <div style="font-size:12px;color:#6b7280;font-family:Arial,Helvetica,sans-serif;">© 2026 BizDynamix · Cape Town, South Africa</div>
-          <div style="margin-top:5px;">
-            <a href="mailto:info@bizdynamix.co.za" style="font-size:12px;color:#00e5c8;text-decoration:none;font-family:Arial,Helvetica,sans-serif;">info@bizdynamix.co.za</a>
+          <div style="margin-top:6px;">
+            <a href="mailto:info@bizdynamix.co.za" style="font-size:12px;color:#00e5c8;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-weight:600;">info@bizdynamix.co.za</a>
           </div>
         </td>
         <td align="right" valign="middle">
-          <div style="font-size:17px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;">
+          <div style="font-size:18px;font-weight:800;color:#eeeef6;font-family:Arial,Helvetica,sans-serif;letter-spacing:-0.03em;">
             Biz<span style="color:#00e5c8;">Dynamix</span>
           </div>
         </td>
@@ -233,8 +230,8 @@ function buildClientEmail($name, $service) {
   </td></tr>
 
   <!-- Legal footer -->
-  <tr><td style="padding:18px 0;text-align:center;">
-    <span style="font-size:11px;color:#9ca3af;font-family:Arial,Helvetica,sans-serif;">
+  <tr><td style="padding:20px 0;text-align:center;">
+    <span style="font-size:11px;color:#6b7280;font-family:Arial,Helvetica,sans-serif;">
       You're receiving this because you submitted a message on bizdynamix.co.za
     </span>
   </td></tr>
