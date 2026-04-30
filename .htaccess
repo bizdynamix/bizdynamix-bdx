@@ -1,0 +1,28 @@
+# BizDynamix cPanel .htaccess
+# Proxy /api/chat to VPS backend
+
+# Enable mod_proxy
+<IfModule mod_proxy.c>
+  ProxyPreserveHost On
+  
+  # Forward chat API requests to VPS backend on port 4000
+  ProxyPass /api/chat http://154.66.198.46:4000/api/chat
+  ProxyPassReverse /api/chat http://154.66.198.46:4000/api/chat
+  
+  # Proxy timeout for chat responses
+  ProxyTimeout 60
+</IfModule>
+
+# Allow the HTML files to be served normally
+<FilesMatch "\.(html|php|xml|txt)$">
+  Deny from none
+</FilesMatch>
+
+# Rewrite rules if needed
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Allow direct access to files
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+</IfModule>
