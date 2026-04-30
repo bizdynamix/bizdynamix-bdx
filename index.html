@@ -542,8 +542,8 @@
     .svc-card:nth-child(5) .svc-icon { background:rgba(var(--violet-rgb),.1); }
     .svc-card:nth-child(6) .svc-icon { background:rgba(var(--gold-rgb),.1); }
     /* Hide PPC & Business Automation for planning */
-    .svc-card:nth-child(4),
-    .svc-card:nth-child(5) { display:none; }
+    .svc-card:nth-child(5),
+    .svc-card:nth-child(6) { display:none; }
     .svc-card:nth-child(8) .svc-icon { background:rgba(var(--gold-rgb),.1); }
     .svc-name {
       font-family:var(--display); font-weight:700;
@@ -784,6 +784,105 @@
     }
     .auth-name { font-weight:600; font-size:.9rem; }
     .auth-role { font-size:.78rem; color:var(--dim); }
+
+    /* ═══════════════════════════════
+       PRICING
+    ═══════════════════════════════ */
+    .pricing-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:2rem; margin-top:3.5rem;
+    }
+    .price-card {
+      background:linear-gradient(135deg,
+        rgba(var(--cyan-rgb),.05) 0%,
+        rgba(var(--violet-rgb),.02) 100%);
+      border:1px solid rgba(var(--cyan-rgb),.15);
+      border-radius:var(--r-lg);
+      padding:2.5rem 2rem;
+      text-align:center;
+      transition:.3s var(--ease);
+      position:relative; overflow:hidden;
+      display:flex; flex-direction:column;
+    }
+    .price-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity:0; transition:.3s var(--ease);
+    }
+    .price-card:hover {
+      background:linear-gradient(135deg,
+        rgba(var(--cyan-rgb),.08) 0%,
+        rgba(var(--violet-rgb),.04) 100%);
+      border-color:rgba(var(--cyan-rgb),.3);
+      transform:translateY(-8px);
+      box-shadow:0 16px 48px rgba(0,229,200,.12);
+    }
+    .price-card:hover::before { opacity:1; }
+    .price-card.featured {
+      border-color:rgba(var(--cyan-rgb),.4);
+      background:linear-gradient(135deg,
+        rgba(var(--cyan-rgb),.12) 0%,
+        rgba(var(--violet-rgb),.06) 100%);
+      transform:scale(1.04);
+    }
+    .price-badge {
+      display:inline-block;
+      background:var(--cyan); color:#000;
+      padding:6px 12px; border-radius:50px;
+      font-size:.7rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.08em;
+      margin-bottom:1.5rem;
+      width:fit-content; margin-left:auto; margin-right:auto;
+    }
+    .price-tier {
+      font-family:var(--display); font-weight:700;
+      font-size:1.3rem; margin-bottom:.5rem;
+      color:var(--text);
+    }
+    .price-amount {
+      font-family:var(--display); font-weight:800;
+      font-size:2.5rem; color:var(--cyan);
+      line-height:1; margin:1.5rem 0;
+      letter-spacing:-.02em;
+    }
+    .price-period {
+      font-size:.85rem; color:var(--muted);
+      margin-bottom:2rem; font-weight:300;
+    }
+    .price-list {
+      list-style:none; text-align:left;
+      margin:0 0 2.5rem; flex-grow:1;
+    }
+    .price-list li {
+      font-size:.9rem; color:var(--muted);
+      padding:.7rem 0; border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex; align-items:center; gap:10px;
+    }
+    .price-list li:last-child { border-bottom:none; }
+    .price-list li::before {
+      content:'✓'; color:var(--cyan); font-weight:700; flex-shrink:0;
+    }
+    .price-cta {
+      background:var(--cyan); color:#000;
+      padding:12px 28px; border-radius:50px;
+      font-weight:700; font-size:.9rem; font-family:var(--display);
+      border:none; cursor:pointer;
+      transition:.25s var(--ease);
+      margin-top:auto;
+    }
+    .price-cta:hover {
+      background:#fff; transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(var(--cyan-rgb),.3);
+    }
+    .price-card.featured .price-cta {
+      background:linear-gradient(135deg, var(--cyan), var(--violet));
+      color:#fff;
+    }
+    .price-card.featured .price-cta:hover {
+      background:linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow:0 12px 36px rgba(0,229,200,.25);
+      color:#fff;
+    }
 
     /* ═══════════════════════════════
        CTA
@@ -1071,13 +1170,18 @@
         <input id="msgName" type="text" placeholder="Your name" required>
       </div>
       <div class="field">
+        <label for="msgEmail">Email</label>
+        <input id="msgEmail" type="email" placeholder="your@email.com" required>
+      </div>
+      <div class="field">
         <label for="msgService">Service</label>
         <select id="msgService" required>
           <option value="">Select a service</option>
-          <option value="Web Design & Development">Web Design & Development</option>
-          <option value="E-Commerce Solutions">E-Commerce Solutions</option>
-          <option value="App Development">App Development</option>
-          <option value="AI Systems">AI Systems</option>
+          <option value="Web Design - Starter (R5,000)">Web Design - Starter (R5,000)</option>
+          <option value="Business Package (R9,900)">Business Package (R9,900)</option>
+          <option value="Premium Package (R12,000)">Premium Package (R12,000)</option>
+          <option value="App Development - Quote on Scope">App Development - Quote on Scope</option>
+          <option value="Custom Quote">Custom Quote</option>
         </select>
       </div>
       <div class="field">
@@ -1159,28 +1263,86 @@
       <span class="svc-pill pill-new">New</span>
     </div>
 
-    <!-- Row 2: Growth & Intelligence -->
     <div class="svc-card highlight reveal reveal-d3">
-      <div class="svc-icon">⚡</div>
-      <div class="svc-name">PPC Advertising</div>
-      <p class="svc-desc">High-ROI paid campaigns on Google, Meta, and LinkedIn. We target the right people and maximise every rand of your ad spend.</p>
-      <span class="svc-pill pill-core">Core Service</span>
-    </div>
-
-    <div class="svc-card highlight reveal reveal-d4">
-      <div class="svc-icon">⚙️</div>
-      <div class="svc-name">Business Automation</div>
-      <p class="svc-desc">Eliminate repetitive tasks and streamline operations. Custom workflows, API integrations, and automated processes that scale with your business.</p>
-      <span class="svc-pill pill-new">New</span>
-    </div>
-
-    <div class="svc-card highlight reveal reveal-d5">
       <div class="svc-icon">🧠</div>
       <div class="svc-name">AI Systems</div>
       <p class="svc-desc">Custom AI chatbots, intelligent agents, and ML integrations that give your business a genuine, lasting competitive edge in the market.</p>
       <span class="svc-pill pill-new">New</span>
     </div>
 
+    <!-- Hidden for now: PPC & Business Automation -->
+    <div class="svc-card highlight reveal reveal-d4">
+      <div class="svc-icon">⚡</div>
+      <div class="svc-name">PPC Advertising</div>
+      <p class="svc-desc">High-ROI paid campaigns on Google, Meta, and LinkedIn. We target the right people and maximise every rand of your ad spend.</p>
+      <span class="svc-pill pill-core">Core Service</span>
+    </div>
+
+    <div class="svc-card highlight reveal reveal-d5">
+      <div class="svc-icon">⚙️</div>
+      <div class="svc-name">Business Automation</div>
+      <p class="svc-desc">Eliminate repetitive tasks and streamline operations. Custom workflows, API integrations, and automated processes that scale with your business.</p>
+      <span class="svc-pill pill-new">New</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ─── PRICING ─── -->
+<section class="section">
+  <div class="section-tag reveal">Transparent Pricing</div>
+  <h2 class="section-h reveal">Simple Plans.<br>Real Results.</h2>
+  <p class="section-p reveal">Choose the package that fits your business. All plans include strategy, design, deployment, and support.</p>
+  
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-badge">Popular</div>
+      <div class="price-tier">Starter</div>
+      <div class="price-amount">R5 000</div>
+      <div class="price-period">one-time investment</div>
+      <ul class="price-list">
+        <li>Professional website</li>
+        <li>Mobile responsive</li>
+        <li>SEO optimized</li>
+        <li>Basic analytics</li>
+        <li>5-page site</li>
+      </ul>
+      <button class="price-cta" id="startCTA">Get Started</button>
+    </div>
+
+    <div class="price-card featured reveal reveal-d2">
+      <div class="price-badge" style="background:var(--gold); color:#000;">Best Value</div>
+      <div class="price-tier">Business</div>
+      <div class="price-amount">R9 900</div>
+      <div class="price-period">one-time investment</div>
+      <ul class="price-list">
+        <li>Full e-commerce OR advanced website</li>
+        <li>Payment integration</li>
+        <li>Inventory management</li>
+        <li>Analytics dashboard</li>
+        <li>Performance optimization</li>
+        <li>3-month support included</li>
+      </ul>
+      <button class="price-cta" id="businessCTA">Get Started</button>
+    </div>
+
+    <div class="price-card reveal reveal-d4">
+      <div class="price-badge">Advanced</div>
+      <div class="price-tier">Premium</div>
+      <div class="price-amount">R12 000</div>
+      <div class="price-period">one-time investment</div>
+      <ul class="price-list">
+        <li>AI chatbot / systems</li>
+        <li>Custom integrations</li>
+        <li>Advanced automation</li>
+        <li>Analytics & reporting</li>
+        <li>App dev quoted separately</li>
+        <li>6-month support included</li>
+      </ul>
+      <button class="price-cta" id="premiumCTA">Get Started</button>
+    </div>
   </div>
 </section>
 
@@ -1466,8 +1628,6 @@
         <li><a href="#services">Web Design</a></li>
         <li><a href="#services">E-Commerce</a></li>
         <li><a href="#services">App Development</a></li>
-        <li><a href="#services">PPC Advertising</a></li>
-        <li><a href="#services">Business Automation</a></li>
         <li><a href="#services">AI Systems</a></li>
       </ul>
     </div>
@@ -1552,6 +1712,7 @@
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   const messageForm = document.getElementById('messageForm');
   const msgName = document.getElementById('msgName');
+  const msgEmail = document.getElementById('msgEmail');
   const msgService = document.getElementById('msgService');
   const msgMobile = document.getElementById('msgMobile');
   const msgBody = document.getElementById('msgBody');
@@ -1589,6 +1750,7 @@ messageForm.addEventListener('submit', async (event) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
         name:    msgName.value,
+        email:   msgEmail.value,
         service: msgService.value,
         mobile:  msgMobile.value,
         message: msgBody.value
@@ -1672,138 +1834,19 @@ messageForm.addEventListener('submit', async (event) => {
     });
   })();
 
-  /* ─── CHATBOT ─── */
-  const _openChatBtn    = document.getElementById('openChatBtn');
-  const _openChatBtnBot = document.getElementById('openChatBtnBottom');
-
-  const getBotReply = async (userText) => {
-    const lower = userText.toLowerCase();
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userText })
-      });
-      const data = await res.json();
-      let reply = data.reply || 'Tell me more about what you\'re looking for.';
-      
-      // Check for interest indicators and suggest next steps
-      if (lower.includes('interested') || lower.includes('learn more') || lower.includes('pricing') || lower.includes('cost') || lower.includes('how much')) {
-        reply += '\n\n💬 Ready to chat more? I can grab your details so our team can send you a custom proposal.';
-      } else if (lower.includes('email') || lower.includes('contact') || lower.includes('phone')) {
-        reply += '\n\n👉 Just open the form below and we\'ll be in touch within 24 hours!';
-      } else if (lower.includes('yes') || lower.includes('sounds good') || lower.includes('let\'s') || lower.includes('when can we')) {
-        reply += '\n\n🎯 Perfect! Let\'s get your details so we can move forward.';
-      }
-      
-      return reply;
-    } catch (e) {
-      console.error('Chat API error:', e);
-      return 'I\'m having trouble connecting right now. No worries — just fill out the form and we\'ll follow up within 24 hours!';
-    }
-  };
-  
-  const _showContactForm = () => {
-    _hideChat();
-    const modal = document.getElementById('messageModal');
-    if (modal) {
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      const input = document.getElementById('msgName');
-      if (input) setTimeout(() => input.focus(), 50);
-    }
-  };
-  
-  const _showQuickReply = (text, action, label) => {
-    const container = document.createElement('div');
-    container.style.cssText = 'align-self:flex-start;display:flex;gap:.6rem;width:100%;';
-    
-    const msg = document.createElement('div');
-    msg.style.cssText = 'max-width:82%;padding:11px 15px;border-radius:18px;font-size:.88rem;line-height:1.65;word-wrap:break-word;align-self:flex-start;background:rgba(255,255,255,.06);color:var(--text);border-bottom-left-radius:4px;';
-    msg.textContent = text;
-    
-    const btn = document.createElement('button');
-    btn.textContent = label;
-    btn.style.cssText = 'padding:11px 15px;border-radius:14px;font-size:.8rem;background:rgba(0,229,200,.15);color:var(--cyan);border:1px solid rgba(0,229,200,.3);cursor:pointer;white-space:nowrap;transition:.2s;font-weight:600;';
-    btn.onmouseover = () => btn.style.background = 'rgba(0,229,200,.25)';
-    btn.onmouseout = () => btn.style.background = 'rgba(0,229,200,.15)';
-    btn.onclick = action;
-    
-    container.appendChild(msg);
-    container.appendChild(btn);
-    _chatMsgs.appendChild(container);
-    _chatMsgs.scrollTop = _chatMsgs.scrollHeight;
-  };
-
-  let _chatModal, _chatMsgs, _chatInput;
-  const _initChat = () => {
-    if (_chatModal) return;
-    _chatModal = document.createElement('div');
-    _chatModal.className = 'modal-overlay';
-    _chatModal.setAttribute('aria-hidden','true');
-    _chatModal.innerHTML =
-      '<div class="modal" style="width:min(100%,560px);display:flex;flex-direction:column;height:min(88vh,620px);padding:0;overflow:hidden;" role="dialog" aria-modal="true" aria-labelledby="chatBotTitle">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;padding:1.3rem 1.7rem;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;">' +
-          '<div><div class="modal-label" style="margin-bottom:.2rem;">BizDynamix AI</div>' +
-          '<h3 id="chatBotTitle" style="font-size:1.25rem;margin:0;">Chat with Us</h3></div>' +
-          '<button id="_chatClose" class="modal-close" aria-label="Close chat" style="position:static;">✕</button>' +
-        '</div>' +
-        '<div id="_chatMsgs" style="flex:1;overflow-y:auto;padding:1.2rem 1.7rem;display:flex;flex-direction:column;gap:.9rem;"></div>' +
-        '<form id="_chatFrm" style="display:flex;gap:.7rem;padding:1.1rem 1.7rem;border-top:1px solid rgba(255,255,255,.08);flex-shrink:0;">' +
-          '<input id="_chatIn" type="text" placeholder="Ask anything…" autocomplete="off" aria-label="Chat message" style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 15px;color:var(--text);font-family:var(--body);font-size:.9rem;outline:none;transition:.2s;">' +
-          '<button type="submit" class="btn-main" style="padding:12px 20px;font-size:.85rem;flex-shrink:0;">Send</button>' +
-        '</form>' +
-      '</div>';
-    document.body.appendChild(_chatModal);
-    _chatMsgs  = document.getElementById('_chatMsgs');
-    _chatInput = document.getElementById('_chatIn');
-    document.getElementById('_chatClose').addEventListener('click', _hideChat);
-    _chatModal.addEventListener('click', (e) => { if (e.target === _chatModal) _hideChat(); });
-    document.getElementById('_chatFrm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const text = _chatInput.value.trim(); if (!text) return;
-      _appendMsg(text,'user'); _chatInput.value = '';
-      _chatInput.disabled = true;
-      const reply = await getBotReply(text);
-      _appendMsg(reply, 'bot');
-      
-      // After bot replies, check if we should show a CTA button
-      const lower = text.toLowerCase();
-      if ((lower.includes('interested') || lower.includes('learn more') || lower.includes('how') || lower.includes('pricing') || lower.includes('ready') || lower.includes('let\'s')) && !lower.includes('no')) {
-        setTimeout(() => {
-          _showQuickReply('Want to move forward?', _showContactForm, '📝 Open Form');
-        }, 600);
-      }
-      
-      _chatInput.disabled = false;
-      _chatInput.focus();
-    });
-    _appendMsg("Hey there 👋 I'm Sarah from the BizDynamix customer success team. I'm here to answer your questions and help you figure out if we're a good fit. If you want to chat about moving forward, I can grab your details and get the ball rolling. What brings you here today?", 'bot');
-  };
-  const _appendMsg = (text, role) => {
-    const d = document.createElement('div');
-    d.style.cssText = 'max-width:82%;padding:11px 15px;border-radius:18px;font-size:.88rem;line-height:1.65;word-wrap:break-word;' +
-      (role === 'user'
-        ? 'align-self:flex-end;background:rgba(0,229,200,.12);color:var(--text);border-bottom-right-radius:4px;'
-        : 'align-self:flex-start;background:rgba(255,255,255,.06);color:var(--text);border-bottom-left-radius:4px;');
-    d.textContent = text;
-    _chatMsgs.appendChild(d);
-    _chatMsgs.scrollTop = _chatMsgs.scrollHeight;
-  };
-  const _showChat = () => {
-    _initChat();
-    _chatModal.classList.add('open');
-    _chatModal.setAttribute('aria-hidden','false');
-    setTimeout(() => _chatInput && _chatInput.focus(), 50);
-  };
-  const _hideChat = () => {
-    if (!_chatModal) return;
-    _chatModal.classList.remove('open');
-    _chatModal.setAttribute('aria-hidden','true');
-  };
-  if (_openChatBtn)    _openChatBtn.addEventListener('click',    _showChat);
-  if (_openChatBtnBot) _openChatBtnBot.addEventListener('click', _showChat);
 </script>
+
+<!-- BDX Chat Widget — one script tag, fully standalone -->
+<script
+  src="/chat-widget/widget.js"
+  data-api="/api/chat"
+  data-site="bdx"
+  data-name="Sarah"
+  data-label="BizDynamix AI"
+  data-greeting="Hey there 👋 I'm Sarah from the BizDynamix team. I can answer your questions and help figure out if we're a good fit. What brings you here today?"
+  data-primary="#00e5c8"
+  data-bg="#111119"
+></script>
 
 </body>
 </html>
