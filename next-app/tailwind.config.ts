@@ -5,13 +5,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#0f4c81",
-        accent: "#f2b736",
-        surface: "#f8fafc"
+        bg:     "#09090f",
+        surf:   "#111119",
+        surf2:  "#18182a",
+        cyan:   "#00e5c8",
+        violet: "#7c6cf5",
+        gold:   "#f5c518",
       },
-      boxShadow: {
-        soft: "0 20px 60px rgba(15, 76, 129, 0.12)"
-      }
+      fontFamily: {
+        display: ["var(--font-display)", "Syne", "sans-serif"],
+        body:    ["var(--font-body)",    "DM Sans", "sans-serif"],
+      },
     }
   },
   plugins: []

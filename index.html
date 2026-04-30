@@ -209,12 +209,108 @@
       position:relative; z-index:1;
       animation:fadeUp .8s .45s var(--ease) both;
     }
+    .modal-overlay {
+      position:fixed; inset:0; display:none;
+      align-items:center; justify-content:center;
+      background:rgba(9,9,15,.8);
+      z-index:400; padding:2rem;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal {
+      width:min(100%,540px); background:rgba(17,17,25,.98);
+      border:1px solid rgba(255,255,255,.08); border-radius:28px;
+      box-shadow:0 32px 120px rgba(0,0,0,.35); padding:2.25rem;
+      position:relative;
+    }
+    .modal-close {
+      position:absolute; top:18px; right:18px;
+      width:38px; height:38px; border:none;
+      border-radius:50%; background:rgba(255,255,255,.08);
+      color:var(--text); cursor:pointer; font-size:1rem;
+    }
+    .modal-label {
+      display:inline-flex; align-items:center; gap:.6rem;
+      color:var(--cyan); font-size:.75rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.15em;
+      margin-bottom:1rem;
+    }
+    .modal h3 {
+      font-family:var(--display); font-size:2rem; margin-bottom:1rem;
+    }
+    .modal p {
+      color:var(--muted); margin-bottom:1.8rem;
+    }
+    .field {
+      display:grid; gap:.45rem; margin-bottom:1.2rem;
+    }
+    .field label { font-size:.9rem; color:var(--muted); }
+    .field input,
+    .field textarea,
+    .field select {
+      width:100%; background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08); border-radius:18px;
+      padding:15px 18px; color:var(--text); font-size:.95rem;
+      outline:none; transition:.2s var(--ease);
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--text) 50%),
+        linear-gradient(135deg, var(--text) 50%, transparent 50%),
+        linear-gradient(to right, rgba(255,255,255,.2), rgba(255,255,255,.2));
+      background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2px) 50%;
+      background-size: 6px 6px, 6px 6px, 1px 60%;
+      background-repeat: no-repeat;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color:rgba(var(--cyan-rgb),.45);
+      box-shadow:0 0 0 6px rgba(var(--cyan-rgb),.08);
+    }
+    .field textarea { min-height:150px; resize:vertical; }
+    .modal-actions {
+      display:flex; flex-wrap:wrap; gap:1rem; justify-content:flex-start;
+      margin-top:1.5rem;
+    }
+    .btn-outline {
+      border:1px solid var(--border2); color:var(--text);
+      padding:15px 34px; border-radius:50px;
+      font-weight:500; font-size:.95rem;
+      transition:.25s var(--ease);
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .btn-outline:hover {
+      border-color:rgba(255,255,255,.3);
+      background:rgba(255,255,255,.05);
+    }
+    .cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .cta-email {
+      display:inline-flex; align-items:center; gap:10px;
+      background:var(--cyan); color:#000;
+      padding:15px 32px; border-radius:50px;
+      font-weight:700; font-size:.95rem; font-family:var(--display);
+      transition:.25s var(--ease);
+      border:none; cursor:pointer;
+    }
+    .cta-email:hover { background:#fff; transform:translateY(-2px); box-shadow:0 12px 40px rgba(var(--cyan-rgb),.3); }
+    .cta-call {
+      border:1px solid var(--border2); color:var(--text);
+      padding:15px 32px; border-radius:50px;
+      font-weight:500; font-size:.95rem;
+      transition:.25s var(--ease);
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .cta-call:hover { border-color:rgba(255,255,255,.3); background:rgba(255,255,255,.04); }
     .btn-main {
       background:var(--cyan); color:#000;
       padding:15px 34px; border-radius:50px;
       font-weight:700; font-size:.95rem;
       font-family:var(--display);
       transition:.25s var(--ease);
+    }
+    .btn-main:hover {
+      background:#fff; transform:translateY(-2px);
+      box-shadow:0 10px 40px rgba(var(--cyan-rgb),.35);
     }
     .btn-main:hover {
       background:#fff; transform:translateY(-2px);
@@ -710,8 +806,8 @@
   </p>
 
   <div class="hero-actions">
-    <a href="#services" class="btn-main">Explore Services</a>
-    <a href="#contact"  class="btn-outline">Book a Free Call</a>
+    <button class="btn-main" id="openMessageBtn">Send a Message</button>
+    <a href="https://wa.me/27712345678?text=Hello%20BizDynamix%20Chatbot" target="_blank" rel="noreferrer" class="btn-outline">WhatsApp Chat</a>
   </div>
 
   <div class="scroll-cue">
@@ -721,6 +817,45 @@
 
   <div class="hero-wm" aria-hidden="true">BIZDYNAMIX</div>
 </section>
+
+<div class="modal-overlay" id="messageModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">✕</button>
+    <div class="modal-label">Send a message</div>
+    <h3 id="modalTitle">Contact BizDynamix</h3>
+    <p>Use this form to send a quick email to info@bizdynamix.co.za or open WhatsApp chat instantly.</p>
+    <form id="messageForm">
+      <div class="field">
+        <label for="msgName">Name</label>
+        <input id="msgName" type="text" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="msgService">Service</label>
+        <select id="msgService" required>
+          <option value="">Select a service</option>
+          <option value="Web Design & Development">Web Design & Development</option>
+          <option value="E-Commerce Solutions">E-Commerce Solutions</option>
+          <option value="App Development">App Development</option>
+          <option value="SEO Services">SEO Services</option>
+          <option value="Business Automation">Business Automation</option>
+          <option value="AI Systems">AI Systems</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="msgMobile">Mobile number (WhatsApp)</label>
+        <input id="msgMobile" type="tel" placeholder="+27 71 234 5678">
+      </div>
+      <div class="field">
+        <label for="msgBody">Message</label>
+        <textarea id="msgBody" placeholder="Tell us what you need..." required></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn-main">Send Message</button>
+        <a id="openWhatsAppBtn" href="https://wa.me/27712345678?text=Hello%20BizDynamix%20Chatbot" target="_blank" rel="noreferrer" class="btn-outline">Open WhatsApp</a>
+      </div>
+    </form>
+  </div>
+</div>
 
 <!-- ─── MARQUEE ─── -->
 <div class="marquee-wrap">
@@ -859,7 +994,7 @@
         <li class="reveal reveal-d5">Deep SA market expertise</li>
       </ul>
       <div style="margin-top:2.5rem;" class="reveal">
-        <a href="#contact" class="btn-main">Work With Us →</a>
+        <button id="openMessageBtnAbout" class="btn-main">Work With Us →</button>
       </div>
     </div>
   </div>
@@ -970,10 +1105,10 @@
     <h2 class="reveal">Ready to Grow<br><span class="grad-text">Your Business?</span></h2>
     <p class="reveal">Book a free strategy call and let's map out exactly how we can accelerate your digital growth — no hard sell, just honest advice.</p>
     <div class="cta-actions reveal">
-      <a href="mailto:info@bizdynamix.co.za" class="cta-email">
-        ✉ info@bizdynamix.co.za
-      </a>
-      <a href="#contact" class="cta-call">Book a Free Call</a>
+      <button class="cta-email" id="openMessageBtnBottom">
+        ✉ Send a Message
+      </button>
+      <a href="https://wa.me/27712345678?text=Hello%20BizDynamix%20Chatbot" target="_blank" rel="noreferrer" class="cta-call">WhatsApp Chat</a>
     </div>
   </div>
 </section>
@@ -1060,6 +1195,57 @@
   }, { threshold: 0.5 });
 
   document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+  /* ─── MESSAGE MODAL ─── */
+  const openMessageBtn = document.getElementById('openMessageBtn');
+  const openMessageBtnAbout = document.getElementById('openMessageBtnAbout');
+  const openMessageBtnBottom = document.getElementById('openMessageBtnBottom');
+  const messageModal = document.getElementById('messageModal');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const messageForm = document.getElementById('messageForm');
+  const msgName = document.getElementById('msgName');
+  const msgService = document.getElementById('msgService');
+  const msgMobile = document.getElementById('msgMobile');
+  const msgBody = document.getElementById('msgBody');
+  const openWhatsAppBtn = document.getElementById('openWhatsAppBtn');
+
+  const showModal = () => {
+    messageModal.classList.add('open');
+    messageModal.setAttribute('aria-hidden', 'false');
+    msgName.focus();
+    updateWhatsAppLink();
+  };
+
+  const hideModal = () => {
+    messageModal.classList.remove('open');
+    messageModal.setAttribute('aria-hidden', 'true');
+  };
+
+  const updateWhatsAppLink = () => {
+    const message = encodeURIComponent(`Hi BizDynamix, I am ${msgName.value || 'interested'} and I want help with ${msgService.value || 'your services'}. My WhatsApp number is ${msgMobile.value || 'not provided'}. ${msgBody.value || ''}`);
+    openWhatsAppBtn.href = `https://wa.me/27712345678?text=${message}`;
+  };
+
+  openMessageBtn.addEventListener('click', showModal);
+  openMessageBtnAbout.addEventListener('click', showModal);
+  openMessageBtnBottom.addEventListener('click', showModal);
+  modalCloseBtn.addEventListener('click', hideModal);
+  messageModal.addEventListener('click', (event) => {
+    if (event.target === messageModal) hideModal();
+  });
+
+  [msgName, msgService, msgMobile, msgBody].forEach(el => {
+    el.addEventListener('input', updateWhatsAppLink);
+    el.addEventListener('change', updateWhatsAppLink);
+  });
+
+  messageForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Website inquiry from ${msgName.value}`);
+    const body = encodeURIComponent(`Name: ${msgName.value}\nService: ${msgService.value}\nWhatsApp: ${msgMobile.value || 'Not provided'}\n\n${msgBody.value}`);
+    window.location.href = `mailto:info@bizdynamix.co.za?subject=${subject}&body=${body}`;
+    hideModal();
+  });
 
   /* ─── MARQUEE ITEMS ─── */
   const items = [
