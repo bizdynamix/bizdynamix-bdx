@@ -1677,6 +1677,7 @@ messageForm.addEventListener('submit', async (event) => {
   const _openChatBtnBot = document.getElementById('openChatBtnBottom');
 
   const getBotReply = async (userText) => {
+    const lower = userText.toLowerCase();
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -1684,11 +1685,54 @@ messageForm.addEventListener('submit', async (event) => {
         body: JSON.stringify({ message: userText })
       });
       const data = await res.json();
-      return data.reply || 'Sorry, I couldn\'t process that. Try asking about web design, e-commerce, apps, or AI systems.';
+      let reply = data.reply || 'Tell me more about what you\'re looking for.';
+      
+      // Check for interest indicators and suggest next steps
+      if (lower.includes('interested') || lower.includes('learn more') || lower.includes('pricing') || lower.includes('cost') || lower.includes('how much')) {
+        reply += '\n\n💬 Ready to chat more? I can grab your details so our team can send you a custom proposal.';
+      } else if (lower.includes('email') || lower.includes('contact') || lower.includes('phone')) {
+        reply += '\n\n👉 Just open the form below and we\'ll be in touch within 24 hours!';
+      } else if (lower.includes('yes') || lower.includes('sounds good') || lower.includes('let\'s') || lower.includes('when can we')) {
+        reply += '\n\n🎯 Perfect! Let\'s get your details so we can move forward.';
+      }
+      
+      return reply;
     } catch (e) {
       console.error('Chat API error:', e);
-      return 'I\'m having trouble connecting. Please use the contact form instead.';
+      return 'I\'m having trouble connecting right now. No worries — just fill out the form and we\'ll follow up within 24 hours!';
     }
+  };
+  
+  const _showContactForm = () => {
+    _hideChat();
+    const modal = document.getElementById('messageModal');
+    if (modal) {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      const input = document.getElementById('msgName');
+      if (input) setTimeout(() => input.focus(), 50);
+    }
+  };
+  
+  const _showQuickReply = (text, action, label) => {
+    const container = document.createElement('div');
+    container.style.cssText = 'align-self:flex-start;display:flex;gap:.6rem;width:100%;';
+    
+    const msg = document.createElement('div');
+    msg.style.cssText = 'max-width:82%;padding:11px 15px;border-radius:18px;font-size:.88rem;line-height:1.65;word-wrap:break-word;align-self:flex-start;background:rgba(255,255,255,.06);color:var(--text);border-bottom-left-radius:4px;';
+    msg.textContent = text;
+    
+    const btn = document.createElement('button');
+    btn.textContent = label;
+    btn.style.cssText = 'padding:11px 15px;border-radius:14px;font-size:.8rem;background:rgba(0,229,200,.15);color:var(--cyan);border:1px solid rgba(0,229,200,.3);cursor:pointer;white-space:nowrap;transition:.2s;font-weight:600;';
+    btn.onmouseover = () => btn.style.background = 'rgba(0,229,200,.25)';
+    btn.onmouseout = () => btn.style.background = 'rgba(0,229,200,.15)';
+    btn.onclick = action;
+    
+    container.appendChild(msg);
+    container.appendChild(btn);
+    _chatMsgs.appendChild(container);
+    _chatMsgs.scrollTop = _chatMsgs.scrollHeight;
   };
 
   let _chatModal, _chatMsgs, _chatInput;
@@ -1722,10 +1766,19 @@ messageForm.addEventListener('submit', async (event) => {
       _chatInput.disabled = true;
       const reply = await getBotReply(text);
       _appendMsg(reply, 'bot');
+      
+      // After bot replies, check if we should show a CTA button
+      const lower = text.toLowerCase();
+      if ((lower.includes('interested') || lower.includes('learn more') || lower.includes('how') || lower.includes('pricing') || lower.includes('ready') || lower.includes('let\'s')) && !lower.includes('no')) {
+        setTimeout(() => {
+          _showQuickReply('Want to move forward?', _showContactForm, '📝 Open Form');
+        }, 600);
+      }
+      
       _chatInput.disabled = false;
       _chatInput.focus();
     });
-    _appendMsg("Hi! 👋 I'm the BizDynamix virtual assistant. How can I help you today?", 'bot');
+    _appendMsg("Hey there 👋 I'm the BizDynamix AI assistant. I can answer questions about our services, but if you want to move forward, I'll grab your details and get our team to follow up with a custom proposal. What can I help with?", 'bot');
   };
   const _appendMsg = (text, role) => {
     const d = document.createElement('div');
