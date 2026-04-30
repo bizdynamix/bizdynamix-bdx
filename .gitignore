@@ -12,3 +12,4 @@ dist
 
 # Local env
 .env
+.env.backup
