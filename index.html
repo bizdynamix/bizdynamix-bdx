@@ -1645,13 +1645,13 @@ messageForm.addEventListener('submit', async (event) => {
 
   const getBotReply = async (userText) => {
     try {
-      const res = await fetch('/api-proxy.php', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userText })
       });
       const data = await res.json();
-      return data.reply || 'Sorry, I couldn\'t process that. Try asking about web design, e-commerce, apps, PPC, or pricing.';
+      return data.reply || 'Sorry, I couldn\'t process that. Try asking about web design, e-commerce, apps, or AI systems.';
     } catch (e) {
       console.error('Chat API error:', e);
       return 'I\'m having trouble connecting. Please use the contact form instead.';
